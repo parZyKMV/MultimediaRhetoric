@@ -1,0 +1,72 @@
+﻿@page "/contact"
+
+<PageTitle>Contact — Kevin Mejía</PageTitle>
+
+<div class="sl-section">
+    <div class="sl-grid"></div>
+    <div class="sl-section-header">
+        <div class="sl-section-tag">[ Transmission Channel — Open ]</div>
+        <h2 class="sl-section-title">SEND A MESSAGE</h2>
+    </div>
+
+    <div class="contact-container">
+
+        <div class="contact-info-panel">
+            <div class="contact-info-tag">◆ Direct Channels</div>
+            <div class="contact-info-item">
+                <span class="contact-info-label">Email</span>
+                <a href="mailto:kevinmmejia50@gmail.com" class="contact-info-val">kevinmmejia50@gmail.com</a>
+            </div>
+            <div class="contact-info-item">
+                <span class="contact-info-label">Phone</span>
+                <span class="contact-info-val">706 - 761 - 2410</span>
+            </div>
+            <div class="contact-info-item">
+                <span class="contact-info-label">Location</span>
+                <span class="contact-info-val">Salt Lake City, Utah</span>
+            </div>
+            <div class="contact-info-item">
+                <span class="contact-info-label">itch.io</span>
+                <a href="https://parzykmv.itch.io" target="_blank" class="contact-info-val">parzykmv.itch.io</a>
+            </div>
+            <div class="contact-status">
+                <span class="status-dot"></span>
+                OPEN TO OPPORTUNITIES
+            </div>
+        </div>
+
+        <div class="contact-form-panel">
+            <div class="contact-field">
+                <label class="contact-label">NAME</label>
+                <input class="contact-input" type="text" placeholder="Your name..." @bind="ContactName" />
+            </div>
+            <div class="contact-field">
+                <label class="contact-label">EMAIL</label>
+                <input class="contact-input" type="email" placeholder="your@email.com" @bind="ContactEmail" />
+            </div>
+            <div class="contact-field">
+                <label class="contact-label">MESSAGE</label>
+                <textarea class="contact-input contact-textarea" placeholder="Your message..." @bind="ContactMessage"></textarea>
+            </div>
+            <button class="sl-btn" @onclick="SendMessage">[ Transmit Message ]</button>
+            @if (Sent)
+            {
+                <div class="contact-success">◈ Message transmitted successfully.</div>
+            }
+        </div>
+
+    </div>
+</div>
+
+@code {
+    private string ContactName = "";
+    private string ContactEmail = "";
+    private string ContactMessage = "";
+    private bool Sent = false;
+
+    private void SendMessage()
+    {
+        if (!string.IsNullOrWhiteSpace(ContactName) && !string.IsNullOrWhiteSpace(ContactMessage))
+            Sent = true;
+    }
+}

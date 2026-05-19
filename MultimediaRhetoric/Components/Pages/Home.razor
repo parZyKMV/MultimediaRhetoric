@@ -1,0 +1,53 @@
+﻿@page "/"
+@inject IJSRuntime JS
+
+<PageTitle>Kevin Mejía — Hunter Profile</PageTitle>
+
+<div class="sl-hero">
+    <div class="sl-grid"></div>
+    <div class="sl-scanline"></div>
+    <div class="sl-corner tl"></div>
+    <div class="sl-corner tr"></div>
+    <div class="sl-corner bl"></div>
+    <div class="sl-corner br"></div>
+
+    <div class="sl-system-tag">[ System Interface v1.0 — Hunter Profile Detected ]</div>
+
+    <h1 class="sl-title">KEVIN MEJIA VAZQUEZ</h1> 
+    <div class="sl-subtitle">Shadow Dev · Game &amp; Software Engineer</div>
+
+    <div class="sl-rank-badge">◆ &nbsp; RANK S &nbsp; — &nbsp; GAME DEVELOPER &nbsp; ◆</div>
+
+    <div class="sl-stats">
+        <div class="sl-stat">
+            <div class="sl-stat-val">3</div>
+            <div class="sl-stat-label">Dungeons</div>
+        </div>
+        <div class="sl-divider"></div>
+        <div class="sl-stat">
+            <div class="sl-stat-val">10+</div>
+            <div class="sl-stat-label">Skills</div>
+        </div>
+        <div class="sl-divider"></div>
+        <div class="sl-stat">
+            <div class="sl-stat-val">2027</div>
+            <div class="sl-stat-label">Ascension</div>
+        </div>
+    </div>
+
+    <div class="sl-hero-links">
+        <a class="sl-btn" href="/projects">[ Enter Dungeon ]</a>
+        <a class="sl-btn secondary" href="mailto:kevinmmejia50@gmail.com">[ Send Message ]</a>
+    </div>
+</div>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await Task.Delay(100); // pequeño delay para que anime.js esté listo
+            await JS.InvokeVoidAsync("portfolioAnimations.animateHero");
+        }
+    }
+}

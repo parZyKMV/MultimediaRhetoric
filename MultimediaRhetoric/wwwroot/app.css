@@ -1,0 +1,827 @@
+﻿/* ═══════════════════════════════════════
+   IMPORTS
+═══════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+/* ═══════════════════════════════════════
+   VARIABLES — Solo Leveling System
+═══════════════════════════════════════ */
+:root {
+    --bg: #050510;
+    --bg2: #0a0a1a;
+    --primary: #7B5FF5;
+    --accent: #00F0FF;
+    --gold: #FFD700;
+    --text: #C8D8F0;
+    --muted: #5a5a8a;
+    --danger: #FF3A6E;
+    --font-sys: 'Share Tech Mono', monospace;
+    --font-title: 'Orbitron', sans-serif;
+}
+
+/* ═══════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════ */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sys);
+    min-height: 100vh;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) var(--bg2);
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg2);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 2px;
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+    a:hover {
+        color: var(--primary);
+    }
+
+h1, h2, h3, h4 {
+    font-family: var(--font-title);
+    color: #fff;
+}
+
+/* ═══════════════════════════════════════
+   HERO SECTION
+═══════════════════════════════════════ */
+.sl-hero {
+    background: var(--bg);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 2rem;
+    text-align: center;
+}
+
+/* Grid background */
+.sl-grid {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(123,95,245,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(123,95,245,0.07) 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: gridPulse 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+/* Scanline effect */
+.sl-scanline {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(0,240,255,0.3), transparent);
+    animation: scan 4s linear infinite;
+    pointer-events: none;
+}
+
+/* Corner brackets */
+.sl-corner {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border-color: var(--primary);
+    border-style: solid;
+    opacity: 0.6;
+}
+
+    .sl-corner.tl {
+        top: 20px;
+        left: 20px;
+        border-width: 2px 0 0 2px;
+    }
+
+    .sl-corner.tr {
+        top: 20px;
+        right: 20px;
+        border-width: 2px 2px 0 0;
+    }
+
+    .sl-corner.bl {
+        bottom: 20px;
+        left: 20px;
+        border-width: 0 0 2px 2px;
+    }
+
+    .sl-corner.br {
+        bottom: 20px;
+        right: 20px;
+        border-width: 0 2px 2px 0;
+    }
+
+/* Text elements */
+.sl-system-tag {
+    color: var(--accent);
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 1;
+}
+
+.sl-title {
+    font-family: var(--font-title);
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+    text-shadow: 0 0 60px rgba(123,95,245,0.5);
+    opacity: 1;
+}
+
+.sl-subtitle {
+    font-family: var(--font-title);
+    font-size: clamp(0.7rem, 2vw, 0.9rem);
+    color: var(--primary);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+    opacity: 1;
+}
+
+/* Rank badge */
+.sl-rank-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--gold);
+    padding: 8px 24px;
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 3px;
+    margin-bottom: 2.5rem;
+    opacity: 1;
+    position: relative;
+}
+
+    .sl-rank-badge::before,
+    .sl-rank-badge::after {
+        content: '';
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: var(--gold);
+        top: -3px;
+    }
+
+    .sl-rank-badge::before {
+        left: -3px;
+    }
+
+    .sl-rank-badge::after {
+        right: -3px;
+    }
+
+/* Stats row */
+.sl-stats {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+    opacity: 1;
+    margin-bottom: 2.5rem;
+}
+
+.sl-stat {
+    text-align: center;
+}
+
+.sl-stat-val {
+    font-family: var(--font-title);
+    font-size: 1.6rem;
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.sl-stat-label {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+.sl-divider {
+    width: 1px;
+    height: 40px;
+    background: rgba(123,95,245,0.3);
+}
+
+/* Enter button */
+.sl-enter-btn {
+    padding: 12px 32px;
+    background: transparent;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    font-family: var(--font-sys);
+    font-size: 12px;
+    letter-spacing: 3px;
+    cursor: pointer;
+    text-transform: uppercase;
+    opacity: 1;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+    .sl-enter-btn:hover {
+        background: rgba(123,95,245,0.15);
+        border-color: var(--accent);
+        color: var(--accent);
+        box-shadow: 0 0 24px rgba(0,240,255,0.15);
+    }
+
+/* ═══════════════════════════════════════
+   SKILLS SECTION
+═══════════════════════════════════════ */
+.sl-section {
+    min-height: 100vh;
+    padding: 5rem 2rem;
+    position: relative;
+    background: var(--bg);
+}
+
+.sl-section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.sl-section-tag {
+    color: var(--accent);
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+}
+
+.sl-section-title {
+    font-family: var(--font-title);
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    color: #fff;
+}
+
+/* Skill cards */
+.skill-card {
+    background: rgba(123,95,245,0.05);
+    border: 1px solid rgba(123,95,245,0.2);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+    opacity: 1;
+    transition: border-color 0.3s;
+}
+
+    .skill-card:hover {
+        border-color: var(--primary);
+    }
+
+.skill-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+}
+
+.skill-name {
+    color: #fff;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+.skill-level {
+    color: var(--accent);
+    font-size: 12px;
+}
+
+.skill-bar-track {
+    height: 4px;
+    background: rgba(255,255,255,0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    width: 0%;
+}
+
+/* ═══════════════════════════════════════
+   DUNGEON CARDS (Projects)
+═══════════════════════════════════════ */
+.dungeons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.dungeon-card {
+    background: var(--bg2);
+    border: 1px solid rgba(123,95,245,0.25);
+    padding: 1.75rem;
+    opacity: 1;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+    .dungeon-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        transform: scaleX(0);
+        transition: transform 0.3s;
+        transform-origin: left;
+    }
+
+    .dungeon-card:hover::before {
+        transform: scaleX(1);
+    }
+
+    .dungeon-card:hover {
+        border-color: var(--primary);
+        transform: translateY(-4px);
+    }
+
+.dungeon-rank {
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 3px;
+    margin-bottom: 0.75rem;
+}
+
+.dungeon-title {
+    font-family: var(--font-title);
+    font-size: 1.1rem;
+    color: #fff;
+    margin-bottom: 0.75rem;
+}
+
+.dungeon-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+}
+
+.dungeon-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.dungeon-tag {
+    font-size: 10px;
+    padding: 3px 10px;
+    border: 1px solid rgba(0,240,255,0.3);
+    color: var(--accent);
+    letter-spacing: 1px;
+}
+
+/* ═══════════════════════════════════════
+   NAV
+═══════════════════════════════════════ */
+.sl-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: rgba(5,5,16,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(123,95,245,0.15);
+}
+
+.sl-nav-logo {
+    font-family: var(--font-title);
+    font-size: 14px;
+    color: var(--primary);
+    letter-spacing: 3px;
+}
+
+.sl-nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+    .sl-nav-links a {
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--muted);
+        transition: color 0.2s;
+    }
+
+        .sl-nav-links a:hover,
+        .sl-nav-links a.active {
+            color: var(--accent);
+        }
+
+/* ═══════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════ */
+@keyframes gridPulse {
+    0%, 100% {
+        opacity: 0.4;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes scan {
+    0% {
+        top: -2px;
+    }
+
+    100% {
+        top: 100%;
+    }
+}
+
+/* ═══════════════════════════════════════
+   BLAZOR DEFAULTS (mantener)
+═══════════════════════════════════════ */
+.blazor-error-boundary {
+    background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTYiIGhlaWdodD0iNDkiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbmsiPjwvc3ZnPg==) no-repeat 1rem/1.8rem, #b32121;
+    padding: 1rem 1rem 1rem 3.7rem;
+    color: white;
+}
+
+    .blazor-error-boundary::after {
+        content: "An error has occurred.";
+    }
+
+.valid.modified:not([type=checkbox]) {
+    outline: 1px solid #26b050;
+}
+
+.invalid {
+    outline: 1px solid var(--danger);
+}
+
+.validation-message {
+    color: var(--danger);
+}
+
+.sl-hero-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.sl-btn {
+    padding: 12px 32px;
+    background: transparent;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    font-family: var(--font-sys);
+    font-size: 12px;
+    letter-spacing: 3px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+    .sl-btn:hover {
+        background: rgba(123,95,245,0.15);
+        border-color: var(--accent);
+        color: var(--accent);
+    }
+
+    .sl-btn.secondary {
+        border-color: var(--muted);
+        color: var(--muted);
+    }
+
+        .sl-btn.secondary:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: rgba(255,215,0,0.08);
+        }
+
+
+
+/* ═══════════════════════════════════════
+   SKILLS PAGE
+═══════════════════════════════════════ */
+.skills-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.skill-category-title {
+    color: var(--accent);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.soft-skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.soft-skill-badge {
+    border: 1px solid rgba(123,95,245,0.4);
+    color: var(--primary);
+    font-size: 11px;
+    padding: 6px 16px;
+    letter-spacing: 2px;
+}
+
+/* ═══════════════════════════════════════
+   PROJECTS PAGE
+═══════════════════════════════════════ */
+.dungeon-link {
+    display: inline-block;
+    margin-top: 1.25rem;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+    .dungeon-link:hover {
+        color: var(--gold);
+    }
+
+    .dungeon-link.muted {
+        color: var(--muted);
+        cursor: default;
+    }
+
+/* ═══════════════════════════════════════
+   EXPERIENCE PAGE
+═══════════════════════════════════════ */
+.stats-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.stat-block-tag {
+    color: var(--accent);
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: 1rem;
+}
+
+.stat-block-card {
+    background: rgba(123,95,245,0.05);
+    border: 1px solid rgba(123,95,245,0.2);
+    padding: 1.75rem;
+}
+
+.stat-block-title {
+    font-family: var(--font-title);
+    color: #fff;
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+}
+
+.stat-block-subtitle {
+    color: var(--primary);
+    font-size: 13px;
+    margin-bottom: 0.4rem;
+}
+
+.stat-block-meta {
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 1rem;
+}
+
+.stat-block-divider {
+    height: 1px;
+    background: rgba(123,95,245,0.2);
+    margin: 1rem 0;
+}
+
+.stat-block-label {
+    color: var(--accent);
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-bottom: 0.75rem;
+}
+
+.coursework-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.coursework-item {
+    font-size: 11px;
+    padding: 4px 12px;
+    border: 1px solid rgba(0,240,255,0.2);
+    color: var(--text);
+    letter-spacing: 1px;
+}
+
+.achievement-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.6;
+}
+
+.achievement-icon {
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.stat-window {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(123,95,245,0.2);
+    padding: 1.5rem;
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(123,95,245,0.1);
+    font-size: 13px;
+}
+
+    .stat-row:last-child {
+        border-bottom: none;
+    }
+
+.stat-key {
+    color: var(--muted);
+    letter-spacing: 1px;
+}
+
+.stat-val-text {
+    color: var(--text);
+}
+
+    .stat-val-text.gold {
+        color: var(--gold);
+    }
+
+/* ═══════════════════════════════════════
+   CONTACT PAGE
+═══════════════════════════════════════ */
+.contact-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 3rem;
+}
+
+.contact-info-tag {
+    color: var(--accent);
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: 1.5rem;
+}
+
+.contact-info-item {
+    margin-bottom: 1.25rem;
+}
+
+.contact-info-label {
+    display: block;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+}
+
+.contact-info-val {
+    font-size: 13px;
+    color: var(--text);
+}
+
+.contact-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 2rem;
+    font-size: 11px;
+    color: #00ff88;
+    letter-spacing: 2px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #00ff88;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.4;
+        transform: scale(0.8);
+    }
+}
+
+.contact-field {
+    margin-bottom: 1.25rem;
+}
+
+.contact-label {
+    display: block;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 3px;
+    margin-bottom: 6px;
+}
+
+.contact-input {
+    width: 100%;
+    background: rgba(123,95,245,0.05);
+    border: 1px solid rgba(123,95,245,0.25);
+    color: var(--text);
+    font-family: var(--font-sys);
+    font-size: 13px;
+    padding: 10px 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+    .contact-input:focus {
+        border-color: var(--primary);
+    }
+
+.contact-textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.contact-success {
+    margin-top: 1rem;
+    color: #00ff88;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+@media (max-width: 640px) {
+    .contact-container {
+        grid-template-columns: 1fr;
+    }
+}
